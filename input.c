@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 15:20:06 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/01/30 17:49:49 by ketrevis         ###   ########.fr       */
+/*   Created: 2024/01/30 16:31:50 by ketrevis          #+#    #+#             */
+/*   Updated: 2024/01/30 17:50:10 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <readline/readline.h>
-# include <signal.h>
-# include <stdbool.h>
-# include "libft.h"
+int	builtin(char **split, char *input, char **env)
+{
+	if (!ft_strcmp(split[0], "echo"))
+		return (ft_echo(input, env), 1);
+	return (0);
+}
 
-char	**echo_split(char *str);
-void	ft_echo(char *input, char **env);
-void	parse_input(char *input, char **env);
+void	parse_input(char *input, char **env)
+{
+	char	**split;
 
-#endif
+	split = ft_split(input, ' ');
+	if (builtin(split, input ,env))
+		return ;
+	free_split(split);
+}
