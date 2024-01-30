@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 18:13:53 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/01/30 19:56:00 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/01/30 20:02:08 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,25 @@ t_env	*add_node(char *name, char *value, t_env *head)
 		return (free(new), free(name), free(value), NULL);
 	if (!head)
 		head = new;
+	else
+		head->next = new;
 	new->name = name;
 	new->value = value;
 	return (head);
+}
+
+void	free_list(t_env *env_list)
+{
+	t_env	*tmp;
+
+	while (env_list)
+	{
+		tmp = env_list;
+		env_list = env_list->next;
+		free(tmp->name);
+		free(tmp->value);
+		free(tmp);
+	}
 }
 
 t_env	*split_env(char **env)
@@ -77,7 +93,8 @@ t_env	*split_env(char **env)
 	i = 0;
 	while (env[i])
 	{
-		env_list = add_node(get_variable_name(env[i]), get_variable_value(env[i]), env_list);
+		env_list = add_node(get_variable_name(env[i]),
+			get_variable_value(env[i]), env_list);
 		if (!env_list)
 		i++;
 	}
