@@ -1,6 +1,6 @@
 NAME = minishell
 
-SRCS = main.c echo_split.c ft_echo.c input.c
+SRCS = main.c echo_split.c ft_echo.c input.c split_env.c
 OBJS = $(SRCS:.c=.o)
 
 CFLAGS = -Wall -Wextra -Werror

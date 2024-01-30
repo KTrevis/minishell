@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:13:49 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/01/30 13:29:07 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:25:59 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,16 @@ void	free_split(char **strs)
 	free(strs);
 }
 
-void	print_split(char **strs)
+uint	split_size(char **split)
 {
-	int	i;
+	uint	i;
 
+	if (!split)
+		return (0);
 	i = 0;
-	if (!strs)
-		return ;
-	while (strs[i])
-	{
-		ft_printf("%s\n", strs[i]);
+	while (split[i])
 		i++;
-	}
+	return (i);
 }
 
 char	**ft_split(char const *s, char c)

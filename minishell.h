@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:20:06 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/01/30 17:49:49 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:26:51 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,16 @@
 # include <stdbool.h>
 # include "libft.h"
 
+typedef struct s_env
+{
+	char			*name;
+	char			*value;
+	struct s_env	*next;
+}	t_env;
+
 char	**echo_split(char *str);
-void	ft_echo(char *input, char **env);
-void	parse_input(char *input, char **env);
+void	ft_echo(char *input);
+void	parse_input(char *input);
+t_env	*split_env(char **env);
 
 #endif

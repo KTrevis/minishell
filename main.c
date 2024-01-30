@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:25:27 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/01/30 17:50:25 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:27:14 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,19 @@ void	quit_shell()
 int	main(int ac, char **av, char **env)
 {
 	char	*input;
+	t_env	*env_list;
 
 	(void)ac;
 	(void)av;
-	(void)env;
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, ctrl_c);
+	env_list = split_env(env);
 	while (1)
 	{
 		input = readline("minishell> ");
 		if (!input)
 			quit_shell();
-		parse_input(input, env);
+		parse_input(input);
 		free(input);
 	}
 }
