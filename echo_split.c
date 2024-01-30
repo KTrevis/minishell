@@ -6,12 +6,11 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 13:59:44 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/01/30 14:42:39 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/01/30 15:57:18 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+#include "minishell.h"
 
 uint	find_next_quote(char *str, uint *i)
 {
@@ -61,14 +60,17 @@ char	*new_quoted_word(char *str, uint *i)
 	j = *i;
 	while (str[j] && str[j] != c)
 		j++;
+	if (str[j] == c)
+		j++;
 	word = ft_calloc(j + 1, sizeof(char));
 	if (!word)
 		return (NULL);
-	j = 0;
+	word[0] = c;
+	j = 1;
 	while (str[*i] && str[*i] != c)
 		word[j++] = str[(*i)++];
 	if (str[*i] == c)
-		(*i)++;
+		word[j++] = str[(*i)++];
 	return (word);
 }
 
@@ -112,13 +114,4 @@ char	**echo_split(char *str)
 	if (ret == 1)
 		return (free_split(split), NULL);
 	return (split);
-}
-
-int	main(int ac, char **av)
-{
-	(void)ac;
-	char **split = echo_split(av[1]);
-	for (int i = 0; split[i]; i++)
-		ft_printf("%s\n", split[i]);
-	free_split(split);
 }
