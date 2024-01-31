@@ -3,7 +3,7 @@ NAME = minishell
 SRCS = main.c quote_split.c ft_echo.c input.c split_env.c env_list.c
 OBJS = $(SRCS:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 all: $(NAME)
 
