@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:20:06 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/01/30 18:26:51 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:28:10 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,12 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-char	**echo_split(char *str);
-void	ft_echo(char *input);
-void	parse_input(char *input);
+char	**quote_split(char *str);
+void	ft_echo(char **split);
+void	parse_input(char *input, t_env *env_list);
 t_env	*split_env(char **env);
+t_env	*add_node(char *name, char *value, t_env *head);
+void	free_list(t_env *env_list);
+void	display_env(t_env *env_list);
 
 #endif

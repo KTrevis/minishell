@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo_split.c                                       :+:      :+:    :+:   */
+/*   quote_split.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 13:59:44 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/01/30 15:57:18 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/01/31 13:40:43 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-uint	find_next_quote(char *str, uint *i)
+static uint	find_next_quote(char *str, uint *i)
 {
 	char	c;
 
@@ -27,7 +27,7 @@ uint	find_next_quote(char *str, uint *i)
 	return (0);
 }
 
-uint	count_words(char *str)
+static uint	count_words(char *str)
 {
 	uint	i;
 	uint	words;
@@ -74,7 +74,7 @@ char	*new_quoted_word(char *str, uint *i)
 	return (word);
 }
 
-int	fill_split(char *str, char **split)
+static int	fill_split(char *str, char **split)
 {
 	uint	i;
 	uint	j;
@@ -88,7 +88,7 @@ int	fill_split(char *str, char **split)
 		{
 			c = str[i];
 			split[j++] = new_quoted_word(str, &i);
-			if (!ft_strchr(str + i, c) || !split[j - 1])
+			if (!ft_strchr(str + i - 1, c) || !split[j - 1])
 				break ;
 		}
 		if (str[i] != ' ' && (i == 0 || str[i - 1] == ' '))
@@ -102,16 +102,14 @@ int	fill_split(char *str, char **split)
 	return (split[j - 1] == NULL);
 }
 
-char	**echo_split(char *str)
+char	**quote_split(char *str)
 {
 	char	**split;
-	int		ret;
 
 	split = ft_calloc(count_words(str) + 1, sizeof(char *));
 	if (!split)
 		return (NULL);
-	ret = fill_split(str, split);
-	if (ret == 1)
+	if (fill_split(str, split))
 		return (free_split(split), NULL);
 	return (split);
 }
