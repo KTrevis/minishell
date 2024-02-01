@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:27:54 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 16:35:51 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:45:29 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static char	*get_variable_value(char *name, t_env *env)
 	if (!name)
 		return (NULL);
 	value = extract_env_value(name, env);
-	free(name);
 	return (value);
 }
 
@@ -52,6 +51,8 @@ static char	*apply_value(char *str, char *value, int len)
 		if (str[i] == '$' && str[i + 1]
 			&& str[i + 1] != ' ')
 			j += insert_value(str, &i, new_str + j, value);
+		if (!str[i])
+			break ;
 		new_str[j++] = str[i++];
 	}
 	return (new_str);
@@ -68,12 +69,11 @@ static char	*replace_name(char *str, t_env *env)
 	if (!name)
 		return (free(str), NULL);
 	value = get_variable_value(name, env);
-	if (!value)
+	if (!*value)
 		return (free(str), free(name), NULL);
 	len = ft_strlen(str) - ft_strlen(name) + ft_strlen(value);
 	new_str = apply_value(str, value, len);
 	free(name);
-	free(value);
 	free(str);
 	return (new_str);
 }
