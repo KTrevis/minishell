@@ -6,19 +6,19 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:53:47 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 13:50:55 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:04:26 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_list	*add_string(t_list *head, char *str)
+static t_split	*add_string(t_split *head, char *str)
 {
-	t_list	*new;
-	t_list	*curr;
+	t_split	*new;
+	t_split	*curr;
 
 	curr = head;
-	new = ft_calloc(1, sizeof(t_list));
+	new = ft_calloc(1, sizeof(t_split));
 	if (!new)
 		return (NULL);
 	if (!head)
@@ -29,7 +29,7 @@ static t_list	*add_string(t_list *head, char *str)
 			curr = curr->next;
 		curr->next = new;
 	}
-	new->content = str;
+	new->str = str;
 	return (head);
 }
 
@@ -65,9 +65,9 @@ static char	*new_word(char *input, int *i)
 	return (str);
 }
 
-t_list	*shell_split(char *input, t_env *env)
+t_split	*shell_split(char *input, t_env *env)
 {
-	t_list	*split;
+	t_split	*split;
 	int		i;
 
 	(void)env;

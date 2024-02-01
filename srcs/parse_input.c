@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:48:59 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 13:55:55 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:05:49 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	parse_input(char *input, t_env *env)
 {
-	t_list	*split;
+	t_split	*split;
 
 	split = shell_split(input, env);
 	free_shell_split(split);
