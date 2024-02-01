@@ -1,9 +1,11 @@
 NAME = minishell
 
-SRCS = main.c quote_split.c ft_echo.c input.c split_env.c env_list.c
+C_FILES = main.c quote_split.c ft_echo.c input.c split_env.c env_list.c env_data.c
+
+SRCS = $(addprefix srcs/,$(C_FILES))
 OBJS = $(SRCS:.c=.o)
 
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -I includes/ -g3
 
 all: $(NAME)
 
@@ -12,7 +14,7 @@ $(NAME): $(OBJS)
 	cc $(CFLAGS) $(OBJS) -o $(NAME) libft/libft.a -lreadline
 
 .c.o:
-	cc $(CFLAGS) -c $^
+	cc $(CFLAGS) -c $^ -o $@
 
 clean:
 	rm -f $(OBJS)

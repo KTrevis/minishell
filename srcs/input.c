@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:31:50 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 09:50:01 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:28:46 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	builtin(char **split, char *input, t_env *env_list)
 {
 	(void)input;
 	if (!ft_strcmp(split[0], "echo"))
-		return (ft_echo(split, env_list), 1);
+		return (ft_echo(split), 1);
 	if (!ft_strcmp(split[0], "env"))
 		return (display_env(env_list), 1);
 	return (0);
