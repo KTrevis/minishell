@@ -1,6 +1,7 @@
 NAME = minishell
 
-C_FILES =	main.c
+C_FILES =	main.c str_replace.c store_env.c env_list_utils.c input.c parse_input.c \
+			replace_var_names.c
 
 SRCS = $(addprefix srcs/,$(C_FILES))
 OBJS = $(SRCS:.c=.o)
