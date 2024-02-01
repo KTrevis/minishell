@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:53:47 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 14:04:26 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 14:15:09 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,11 @@ static char	*new_word(char *input, int *i)
 	str = ft_calloc(j + 1, sizeof(char));
 	j = 0;
 	while (input[*i] && input[*i] != c)
-		str[j++] = input[(*i)++];
+	{
+		if (input[*i] != '\'' && input[*i] != '"')
+			str[j++] = input[(*i)];
+		(*i)++;
+	}
 	return (str);
 }
 
