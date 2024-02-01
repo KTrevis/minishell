@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:31:50 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/01/31 15:32:51 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 09:50:01 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,16 @@ int	builtin(char **split, char *input, t_env *env_list)
 	return (0);
 }
 
-void	parse_input(char *input, t_env *env_list)
+int	parse_input(char *input, t_env *env_list)
 {
 	char	**split;
 
 	split = quote_split(input);
 	if (!split)
-		return ;
+		return (0);
 	if (builtin(split, input, env_list))
-		return ;
+		return (free_split(split), 1);
 	printf("%s: command not found\n", split[0]);
 	free_split(split);
+	return (1);
 }

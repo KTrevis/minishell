@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 13:59:44 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/01/31 15:37:50 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 09:47:50 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,13 @@ static int	fill_split(char *str, char **split)
 		{
 			c = str[i];
 			split[j++] = new_quoted_word(str, &i);
-			if (!ft_strchr(str + i - 1, c) || !split[j - 1])
+			if (!str[i] || !ft_strchr(str + i - 1, c) || !split[j - 1])
 				break ;
 		}
 		if (str[i] != ' ' && (i == 0 || str[i - 1] == ' '))
 		{
 			split[j++] = new_word(str + i, ' ');
-			if (!split[j - 1])
+			if (!str[i] || !split[j - 1])
 				return (1);
 		}
 		i++;

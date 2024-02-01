@@ -9,7 +9,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C libft/
-	cc $(CFLAGS) -lreadline $(OBJS) -o $(NAME) libft/libft.a
+	cc $(CFLAGS) $(OBJS) -o $(NAME) libft/libft.a -lreadline
 
 .c.o:
 	cc $(CFLAGS) -c $^
