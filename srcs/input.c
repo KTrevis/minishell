@@ -6,15 +6,16 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:38:28 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 15:08:21 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:58:29 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <readline/readline.h>
 
-static void	catch_sigint()
+static void	catch_sigint(int sig)
 {
+	(void)sig;
 	rl_on_new_line();
 	printf("\n");
 	rl_replace_line("", 0);

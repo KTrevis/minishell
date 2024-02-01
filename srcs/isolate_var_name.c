@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:48:07 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 15:50:03 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:56:54 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*isolate_var_name(char *str)
 	while (str[i])
 	{
 		if (str[i] == '$' && str[i + 1]
-				&& str[i + 1] != ' ')
+			&& str[i + 1] != ' ')
 			return (ft_substr(str, i, get_name_len(str + i)));
 		i++;
 	}

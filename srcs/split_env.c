@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:15:16 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 13:10:10 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:57:29 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ t_env	*add_env_var(t_env *env_list, char *name, char *value)
 static char	*get_env_value(char *var)
 {
 	char	*name;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -55,7 +55,7 @@ static char	*get_env_value(char *var)
 static char	*get_env_name(char *var)
 {
 	char	*name;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (var[i] && var[i] != '=')
@@ -79,7 +79,8 @@ t_env	*split_env(char **env)
 	i = 0;
 	while (env[i])
 	{
-		env_list = add_env_var(env_list, get_env_name(env[i]), get_env_value(env[i]));
+		env_list = add_env_var(env_list, get_env_name(env[i]),
+				get_env_value(env[i]));
 		i++;
 	}
 	return (env_list);

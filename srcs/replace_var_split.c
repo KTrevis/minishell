@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:27:54 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 16:45:29 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:56:47 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*get_variable_value(char *name, t_env *env)
 	return (value);
 }
 
-static int insert_value(char *str, int *i, char *new_str, char *value)
+static int	insert_value(char *str, int *i, char *new_str, char *value)
 {
 	int	j;
 
