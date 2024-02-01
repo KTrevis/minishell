@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 13:59:44 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 09:47:50 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:22:46 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,11 @@ char	*new_quoted_word(char *str, uint *i)
 	j = *i;
 	while (str[j] && str[j] != c)
 		j++;
-	if (str[j] == c)
-		j++;
 	word = ft_calloc(j + 1, sizeof(char));
 	if (!word)
 		return (NULL);
-	word[0] = c;
-	j = 1;
+	j = 0;
 	while (str[*i] && str[*i] != c)
-		word[j++] = str[(*i)++];
-	if (str[*i] == c)
 		word[j++] = str[(*i)++];
 	return (word);
 }
