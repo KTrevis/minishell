@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:07:31 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 22:08:46 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 22:52:57 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,17 @@ void	display_env(t_env *env)
 		printf("%s=%s\n", env->name, env->value);
 		env = env->next;
 	}
+}
+
+char	*get_var_value(t_env *head, char *name)
+{
+	while (head)
+	{
+		if (!ft_strcmp(head->name, name))
+			return (head->value);
+		head = head->next;
+	}
+	return ("");
 }
 
 t_env	*add_env_node(t_env *head, char *name, char *value)

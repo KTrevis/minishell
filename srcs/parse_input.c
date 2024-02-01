@@ -6,14 +6,18 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:13:01 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 22:30:26 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 23:24:33 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	parse_input(char *input)
+int	parse_input(char *input, t_env *env)
 {
-	replace_var_names(input);
+	char	*replaced;
+
+	replaced = replace_var_names(input, env);
+	printf("%s\n", replaced);
+	free(replaced);
 	return (1);
 }
