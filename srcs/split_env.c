@@ -5,60 +5,81 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 18:13:53 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 10:38:42 by ketrevis         ###   ########.fr       */
+/*   Created: 2024/02/01 12:15:16 by ketrevis          #+#    #+#             */
+/*   Updated: 2024/02/01 12:33:32 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "minishell.h"
 
-static char	*get_variable_name(char *env)
+t_env	*get_last_env(t_env *curr)
 {
-	uint	i;
+	while (curr->next)
+		curr = curr->next;
+	return (curr);
+}
+
+t_env	*add_node(t_env *env_list, char *name, char *value)
+{
+	t_env	*new;
+
+	new = ft_calloc(1, sizeof(t_env));
+	if (!new)
+		return (NULL);
+	if (!env_list)
+		env_list = new;
+	else
+		get_last_env(env_list)->next = new;
+	new->name = name;
+	new->value = value;
+	return (env_list);
+}
+
+static char	*get_env_value(char *var)
+{
 	char	*name;
+	int	i;
+	int	j;
 
 	i = 0;
-	while (env[i] && env[i] != '=')
+	j = 0;
+	while (var[i] && var[i] != '=')
+		i++;
+	name = ft_calloc(ft_strlen(var) - i + 1, sizeof(char));
+	i++;
+	while (var[i])
+		name[j++] = var[i++];
+	return (name);
+}
+
+static char	*get_env_name(char *var)
+{
+	char	*name;
+	int	i;
+
+	i = 0;
+	while (var[i] && var[i] != '=')
 		i++;
 	name = ft_calloc(i + 1, sizeof(char));
-	if (!name)
-		return (NULL);
 	i = 0;
-	while (env[i] && env[i] != '=')
+	while (var[i] && var[i] != '=')
 	{
-		name[i] = env[i];
+		name[i] = var[i];
 		i++;
 	}
 	return (name);
 }
 
-static char	*get_variable_value(char *env)
-{
-	uint	i;
-	char	*value;
-
-	i = 0;
-	while (env[i] && env[i] != '=')
-		i++;
-	i++;
-	value = ft_strdup(env + i);
-	return (value);
-}
-
 t_env	*split_env(char **env)
 {
 	t_env	*env_list;
-	uint	i;
+	int		i;
 
-	i = 0;
 	env_list = NULL;
+	i = 0;
 	while (env[i])
 	{
-		env_list = add_node(get_variable_name(env[i]),
-			get_variable_value(env[i]), env_list);
-		if (!env_list)
-			return (free_list(env_list), NULL);
+		env_list = add_node(env_list, get_env_name(env[i]), get_env_value(env[i]));
 		i++;
 	}
 	return (env_list);

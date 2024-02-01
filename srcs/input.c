@@ -5,35 +5,39 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 16:31:50 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 11:04:25 by ketrevis         ###   ########.fr       */
+/*   Created: 2024/02/01 12:38:28 by ketrevis          #+#    #+#             */
+/*   Updated: 2024/02/01 12:45:31 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	builtin(char **split, char *input, t_env *env_list)
+static void	catch_sigint()
 {
-	(void)input;
-	if (!ft_strcmp(split[0], "echo"))
-		return (ft_echo(split), 1);
-	if (!ft_strcmp(split[0], "env"))
-		return (display_env(env_list), 1);
-	return (0);
+	rl_on_new_line();
+	printf("\n");
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
-int	parse_input(char *input, t_env *env_list)
+void	quit_shell(t_env *env)
 {
-	char	**split;
+	free_env(env);
+	printf("exit\n");
+	exit(0);
+}
 
-	split = quote_split(input);
-	if (!split)
-		return (0);
-	if (!split[0])
-		return (free_split(split), 1);
-	if (builtin(split, input, env_list))
-		return (free_split(split), 1);
-	printf("%s: command not found\n", split[0]);
-	free_split(split);
-	return (1);
+void	input(t_env *env)
+{
+	char	*input;
+
+	signal(SIGINT, catch_sigint);
+	signal(SIGQUIT, SIG_IGN);
+	while (1)
+	{
+		input = readline("minishell> ");
+		if (!input)
+			quit_shell(env);
+		printf("%s\n", input);
+	}
 }

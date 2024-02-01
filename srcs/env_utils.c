@@ -1,51 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_echo.c                                          :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/30 16:36:04 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 11:05:29 by ketrevis         ###   ########.fr       */
+/*   Created: 2024/02/01 12:34:12 by ketrevis          #+#    #+#             */
+/*   Updated: 2024/02/01 12:36:58 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "minishell.h"
 
-int	is_only_n(char *str)
+void	display_env(t_env *env)
 {
-	int	i;
-
-	i = 1;
-	while (str[i])
+	while (env)
 	{
-		if (str[i] != 'n')
-			return (0);
-		i++;
+		printf("%s=%s\n", env->name, env->value);
+		env = env->next;
 	}
-	return (1);
 }
 
-void	ft_echo(char **split)
+void	free_env(t_env *env)
 {
-	uint	i;
-	bool	flag;
+	t_env	*tmp;
 
-	flag = false;
-	i = 1;
-	while (split[i] && !ft_strncmp(split[i], "-n", 2) && is_only_n(split[i]))
+	while (env)
 	{
-		flag = true;
-		i++;
+		tmp = env;
+		env = env->next;
+		free(tmp->value);
+		free(tmp->name);
+		free(tmp);
 	}
-	while (split[i])
-	{
-		write(1, split[i], ft_strlen(split[i]));
-		if (split[i + 1])
-			ft_putchar_fd(' ', 1);
-		i++;
-	}
-	if (!flag)
-		printf("\n");
 }
