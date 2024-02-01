@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 14:08:11 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 14:20:39 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:48:23 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	ft_echo(t_split *split)
 	bool	flag;
 
 	flag = false;
+	if (!split || !split->str)
+		return ;
 	while (split && split->str[0] == '-' && is_only_n(split->str + 1))
 	{
 		flag = true;
