@@ -1,45 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   shell_split_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 12:38:28 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 13:56:18 by ketrevis         ###   ########.fr       */
+/*   Created: 2024/02/01 13:53:50 by ketrevis          #+#    #+#             */
+/*   Updated: 2024/02/01 13:55:08 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <readline/readline.h>
 
-static void	catch_sigint()
+void	free_shell_split(t_list *head)
 {
-	rl_on_new_line();
-	printf("\n");
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
+	t_list	*tmp;
 
-void	quit_shell(t_env *env)
-{
-	free_env(env);
-	printf("exit\n");
-	exit(0);
-}
-
-void	input(t_env *env)
-{
-	char	*input;
-
-	signal(SIGINT, catch_sigint);
-	signal(SIGQUIT, SIG_IGN);
-	while (1)
+	while (head)
 	{
-		input = readline("minishell> ");
-		if (!input)
-			quit_shell(env);
-		parse_input(input, env);
-		free(input);
+		tmp = head;
+		head = head->next;
+		free(tmp->content);
+		free(tmp);
 	}
 }
