@@ -18,9 +18,11 @@ $(NAME): $(OBJS)
 	cc $(CFLAGS) -c $^ -o $@
 
 clean:
+	make -C libft/ clean
 	rm -f $(OBJS)
 
 fclean: clean
+	make -C libft/ fclean
 	rm -f $(NAME)
 
 re: fclean all
