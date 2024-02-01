@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:34:12 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 15:36:26 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:35:27 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	free_env(t_env *env)
 	}
 }
 
-char	*get_env_value(char *name, t_env *env)
+char	*extract_env_value(char *name, t_env *env)
 {
 	int	i;
 

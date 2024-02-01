@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:20:06 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 16:05:41 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:36:06 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int		parse_input(char *input, t_env *env);
 t_split	*shell_split(char *input, t_env *env);
 void	free_shell_split(t_split *head);
 void	ft_echo(t_split *split);
-char	*get_env_value(char *name, t_env *env);
 char	*isolate_var_name(char *str);
 char	*replace_var_split(char *str, t_env *env);
+char	*extract_env_value(char *name, t_env *env);
 
 #endif

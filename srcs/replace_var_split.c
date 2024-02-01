@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 15:27:54 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 16:32:41 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:35:51 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*get_variable_value(char *name, t_env *env)
 
 	if (!name)
 		return (NULL);
-	value = get_env_value(name, env);
+	value = extract_env_value(name, env);
 	free(name);
 	return (value);
 }
