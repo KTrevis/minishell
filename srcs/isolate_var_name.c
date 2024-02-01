@@ -1,52 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.c                                        :+:      :+:    :+:   */
+/*   isolate_var_name.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/01 12:34:12 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 15:36:26 by ketrevis         ###   ########.fr       */
+/*   Created: 2024/02/01 15:48:07 by ketrevis          #+#    #+#             */
+/*   Updated: 2024/02/01 15:50:03 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	display_env(t_env *env)
-{
-	while (env)
-	{
-		printf("%s=%s\n", env->name, env->value);
-		env = env->next;
-	}
-}
-
-void	free_env(t_env *env)
-{
-	t_env	*tmp;
-
-	while (env)
-	{
-		tmp = env;
-		env = env->next;
-		free(tmp->value);
-		free(tmp->name);
-		free(tmp);
-	}
-}
-
-char	*get_env_value(char *name, t_env *env)
+static int	get_name_len(char *str)
 {
 	int	i;
 
 	i = 0;
-	if (*name == '$')
+	while (str[i] && str[i] != ' ')
 		i++;
-	while (env)
+	return (i);
+}
+
+char	*isolate_var_name(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
 	{
-		if (!ft_strcmp(name + i, env->name))
-			return (env->value);
-		env = env->next;
+		if (str[i] == '$' && str[i + 1]
+				&& str[i + 1] != ' ')
+			return (ft_substr(str, i, get_name_len(str + i)));
+		i++;
 	}
-	return ("");
+	return (NULL);
 }

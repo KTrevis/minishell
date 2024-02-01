@@ -6,13 +6,13 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:53:47 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 15:06:29 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:06:28 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_split	*add_string(t_split *head, char *str)
+static t_split	*add_string(t_split *head, char *str, char c, t_env *env)
 {
 	t_split	*new;
 	t_split	*curr;
@@ -22,7 +22,7 @@ static t_split	*add_string(t_split *head, char *str)
 	curr = head;
 	new = ft_calloc(1, sizeof(t_split));
 	if (!new)
-		return (NULL);
+		return (free(str), NULL);
 	if (!head)
 		head = new;
 	else
@@ -44,7 +44,7 @@ int	is_word_start(char *str, int i)
 	return (0);
 }
 
-static char	*new_word(t_split *split, char *input, int *i)
+static t_split	*new_word(t_split *split, char *input, int *i, t_env *env)
 {
 	char	*str;
 	char	c;
@@ -70,7 +70,7 @@ static char	*new_word(t_split *split, char *input, int *i)
 			str[j++] = input[(*i)];
 		(*i)++;
 	}
-	return (str);
+	return (add_string(split, str, c, env));
 }
 
 t_split	*shell_split(char *input, t_env *env)
@@ -78,14 +78,13 @@ t_split	*shell_split(char *input, t_env *env)
 	t_split	*split;
 	int		i;
 
-	(void)env;
 	i = 0;
 	split = NULL;
 	while (input[i])
 	{
 		if (is_word_start(input, i))
 		{
-			split = add_string(split, new_word(split, input, &i));
+			split = new_word(split, input, &i, env);
 			if (!split)
 				return (free_shell_split(split), NULL);
 		}

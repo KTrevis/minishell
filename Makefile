@@ -1,7 +1,7 @@
 NAME = minishell
 
 C_FILES =	main.c parse_input.c split_env.c env_utils.c input.c shell_split.c \
-			shell_split_utils.c ft_echo.c
+			shell_split_utils.c ft_echo.c replace_var_split.c isolate_var_name.c
 
 SRCS = $(addprefix srcs/,$(C_FILES))
 OBJS = $(SRCS:.c=.o)
