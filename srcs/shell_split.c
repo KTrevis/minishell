@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:53:47 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 14:15:09 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:06:29 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static t_split	*add_string(t_split *head, char *str)
 	t_split	*new;
 	t_split	*curr;
 
+	if (!str)
+		return (free_shell_split(head), NULL);
 	curr = head;
 	new = ft_calloc(1, sizeof(t_split));
 	if (!new)
@@ -42,7 +44,7 @@ int	is_word_start(char *str, int i)
 	return (0);
 }
 
-static char	*new_word(char *input, int *i)
+static char	*new_word(t_split *split, char *input, int *i)
 {
 	char	*str;
 	char	c;
@@ -59,6 +61,8 @@ static char	*new_word(char *input, int *i)
 	while (input[j] && input[j] != c)
 		j++;
 	str = ft_calloc(j + 1, sizeof(char));
+	if (!str)
+		return (free_shell_split(split), NULL);
 	j = 0;
 	while (input[*i] && input[*i] != c)
 	{
@@ -80,7 +84,11 @@ t_split	*shell_split(char *input, t_env *env)
 	while (input[i])
 	{
 		if (is_word_start(input, i))
-			split = add_string(split, new_word(input, &i));
+		{
+			split = add_string(split, new_word(split, input, &i));
+			if (!split)
+				return (free_shell_split(split), NULL);
+		}
 		if (!input[i])
 			break ;
 		i++;

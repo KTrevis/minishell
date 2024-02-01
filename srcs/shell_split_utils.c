@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 13:53:50 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 14:03:09 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:06:46 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	free_shell_split(t_split *head)
 {
 	t_split	*tmp;
 
+	if (!head)
+		return ;
 	while (head)
 	{
 		tmp = head;
