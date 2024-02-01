@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 12:53:47 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 16:06:28 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:30:20 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ static t_split	*add_string(t_split *head, char *str, char c, t_env *env)
 			curr = curr->next;
 		curr->next = new;
 	}
-	new->str = str;
+	if (c != '\'')
+		new->str = replace_var_split(str, env);
+	else
+		new->str = str;
 	return (head);
 }
 
