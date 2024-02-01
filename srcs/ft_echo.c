@@ -6,10 +6,11 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:36:04 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 10:23:07 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:05:29 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "minishell.h"
 
 int	is_only_n(char *str)
@@ -41,6 +42,8 @@ void	ft_echo(char **split)
 	while (split[i])
 	{
 		write(1, split[i], ft_strlen(split[i]));
+		if (split[i + 1])
+			ft_putchar_fd(' ', 1);
 		i++;
 	}
 	if (!flag)

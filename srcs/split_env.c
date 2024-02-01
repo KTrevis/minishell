@@ -6,14 +6,14 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 18:13:53 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/01/31 11:57:11 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:38:42 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "minishell.h"
 
-char	*get_variable_name(char *env)
+static char	*get_variable_name(char *env)
 {
 	uint	i;
 	char	*name;
@@ -33,7 +33,7 @@ char	*get_variable_name(char *env)
 	return (name);
 }
 
-char	*get_variable_value(char *env)
+static char	*get_variable_value(char *env)
 {
 	uint	i;
 	char	*value;

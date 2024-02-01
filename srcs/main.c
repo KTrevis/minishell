@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 16:25:27 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 09:50:15 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 10:54:13 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ int	main(int ac, char **av, char **env)
 			return (0);
 		free(input);
 	}
+	free_list(env_list);
 }

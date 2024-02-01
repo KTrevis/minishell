@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 13:59:44 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 10:22:46 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 11:04:34 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static int	fill_split(char *str, char **split)
 		}
 		i++;
 	}
-	return (j == 0 || split[j - 1] == NULL);
+	return (0);
 }
 
 char	**quote_split(char *str)
