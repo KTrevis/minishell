@@ -1,7 +1,6 @@
 NAME = minishell
 
-C_FILES = main.c split_input.c split_env.c env_utils.c input.c
-
+C_FILES = main.c parse_input.c split_env.c env_utils.c input.c shell_split.c
 SRCS = $(addprefix srcs/,$(C_FILES))
 OBJS = $(SRCS:.c=.o)
 

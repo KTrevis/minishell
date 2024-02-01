@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:52:35 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/01/30 18:55:53 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:24:19 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int		ft_putaddr_len(void *ptr);
 int		ft_puthexa_unsigned_len(uintptr_t n, char c);
 int		ft_putnbr_unsigned_len(unsigned int n);
 int		ft_printf(const char *str, ...);
-char	*new_word(char const *s, char c);
 char	ft_uppercase_char(char c);
 char	*ft_uppercase_str(char *str);
 
