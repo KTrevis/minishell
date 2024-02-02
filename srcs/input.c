@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:09:18 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 22:54:31 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/02 09:50:31 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,5 @@ void	input(t_env *env)
 		if (!input)
 			quit_shell(env);
 		parse_input(input, env);
-		free(input);
 	}
 }

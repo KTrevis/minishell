@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 21:32:02 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 23:47:24 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/02 09:47:23 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	*str_replace(char *str, char *old, char *new)
 	in_simple_quote = false;
 	size = ft_strlen(str) + ft_strlen(new) - ft_strlen(old);
 	new_str = ft_calloc(size + 1, sizeof(char));
+	if (!new_str)
+		return (NULL);
 	i = 0;
 	j = 0;
 	while (str[i] && j <= size)

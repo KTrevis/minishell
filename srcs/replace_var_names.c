@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:16:20 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 23:46:54 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/02 10:02:29 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static char	*duplicate_var_name(char *str)
 	while (str[i] && in_var_name(str[i]))
 		i++;
 	name = ft_calloc(i + 1, sizeof(char));
+	if (!name)
+		return (NULL);
 	name[0] = '$';
 	i = 1;
 	j = 1;
@@ -82,9 +84,13 @@ char	*replace_var_names(char *input, t_env *env)
 	char	*replaced;
 
 	name = extract_var_name(input);
-	if (!*name)
-		return (free(name), ft_strdup(input));
+	if (!*name || !name)
+	{
+		replaced = ft_strdup(input);
+		return (free(name), replaced);
+	}
 	value = get_var_value(env, name + 1);
 	replaced = str_replace(input, name, value);
+	free(name);
 	return (replaced);
 }
