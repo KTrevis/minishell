@@ -6,13 +6,13 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:13:01 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/02 10:03:48 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/02 10:06:15 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	parse_input(char *input, t_env *env)
+static char	*replace_every_var_names(char *input, t_env *env)
 {
 	char	*replaced;
 	char	*old;
@@ -20,7 +20,7 @@ int	parse_input(char *input, t_env *env)
 	old = input;
 	replaced = replace_var_names(input, env);
 	if (!replaced)
-		return (0);
+		return (NULL);
 	while (ft_strcmp(old, replaced))
 	{
 		if (old != input)
@@ -28,11 +28,18 @@ int	parse_input(char *input, t_env *env)
 		old = replaced;
 		replaced = replace_var_names(old, env);
 		if (!replaced)
-			return (free(input), free(old), 0);
+			return (free(input), free(old), NULL);
 	}
-	printf("%s\n", replaced);
 	free(old);
 	free(input);
-	free(replaced);
+	return (replaced);
+}
+
+int	parse_input(char *input, t_env *env)
+{
+	input = replace_every_var_names(input, env);
+
+	printf("%s\n", input);
+	free(input);
 	return (1);
 }
