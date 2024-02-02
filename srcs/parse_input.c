@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:13:01 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/02 10:06:15 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:06:26 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ static char	*replace_every_var_names(char *input, t_env *env)
 
 int	parse_input(char *input, t_env *env)
 {
-	input = replace_every_var_names(input, env);
+	t_split	*split;
 
-	printf("%s\n", input);
+	input = replace_every_var_names(input, env);
+	split = shell_split(input);
+	free_shell_split(split);
 	free(input);
 	return (1);
 }
