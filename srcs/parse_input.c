@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:13:01 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/02 11:48:20 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:35:42 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,32 @@ static char	*replace_every_var_names(char *input, t_env *env)
 	return (replaced);
 }
 
+static char	quote_not_closed(char *str)
+{
+	int		i;
+	char	quote;
+
+	i = 0;
+	quote = 0;
+	while (str[i])
+	{
+		if ((!quote || quote == str[i]) && (str[i] == '\'' || str[i] == '"'))
+		{
+			if (!quote)
+				quote = str[i];
+			else
+				quote = 0;
+		}
+		i++;
+	}
+	return (quote);
+}
+
 int	parse_input(char *input, t_env *env)
 {
 	t_split	*split;
 
+	printf("%c\n", quote_not_closed(input));
 	input = replace_every_var_names(input, env);
 	if (!input)
 		return (0);
