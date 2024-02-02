@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:13:14 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/02 11:05:23 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:18:32 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ static int	new_world_len(char *str, char c)
 
 	i = 0;
 	while (str[i] && str[i] != c)
+	{
+		if (str[i] == '\'' || str[i] == '"')
+			c = str[i];
 		i++;
+	}
 	return (i);
 }
 
@@ -60,8 +64,12 @@ static char	*new_word(char *str, int *i)
 	word = ft_calloc(new_world_len(str + *i, c) + 1, sizeof(char));
 	j = 0;
 	while (str[*i] && str[*i] != c)
+	{
+		if (str[*i] == '\'' || str[*i] == '"')
+			c = str[(*i)++];
 		word[j++] = str[(*i)++];
-	if (str[*i] == c)
+	}
+	if (str[*i] == '\'' || str[*i] == '"')
 		(*i)++;
 	return (word);
 }
