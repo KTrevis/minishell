@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:13:01 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/02 11:11:39 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:48:20 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	parse_input(char *input, t_env *env)
 	t_split	*split;
 
 	input = replace_every_var_names(input, env);
+	if (!input)
+		return (0);
 	split = shell_split(input);
-	for (t_split *curr = split; curr; curr = curr->next)
-		printf("%s\n", curr->str);
 	free_shell_split(split);
 	free(input);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:16:20 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/02 11:02:46 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:49:12 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ char	*replace_var_names(char *input, t_env *env)
 	if (!*name || !name)
 	{
 		replaced = ft_strdup(input);
-		return (free(name), replaced);
+		free(name);
+		if (!replaced)
+			return (NULL);
+		return (replaced);
 	}
 	value = get_var_value(env, name + 1);
 	replaced = str_replace(input, name, value);

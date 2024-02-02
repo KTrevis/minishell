@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 21:32:02 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/02 11:22:06 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:44:05 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*str_replace(char *str, char *old, char *new)
 	{
 		if (str[i] == '\'')
 			in_simple_quote = !in_simple_quote;
-		if (str[i] == '$' && !ft_strncmp(str + i, old, ft_strlen(old))
+		if (!ft_strncmp(str + i, old, ft_strlen(old))
 			&& !in_simple_quote)
 		{
 			j += ft_strlcpy(new_str + j, new, ft_strlen(new) + 1);
