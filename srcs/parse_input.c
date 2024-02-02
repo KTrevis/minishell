@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:13:01 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/02 10:01:37 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/02 10:03:48 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	parse_input(char *input, t_env *env)
 			return (free(input), free(old), 0);
 	}
 	printf("%s\n", replaced);
+	free(old);
 	free(input);
 	free(replaced);
 	return (1);
