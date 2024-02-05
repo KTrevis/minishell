@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:20:06 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/02 10:59:38 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/05 10:14:12 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_env
 typedef struct s_split
 {
 	char			*str;
+	bool			to_replace;
 	struct s_split	*next;
 }	t_split;
 
