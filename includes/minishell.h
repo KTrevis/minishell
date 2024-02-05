@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:20:06 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/05 10:14:12 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/05 15:36:59 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,18 @@ typedef struct s_env
 typedef struct s_split
 {
 	char			*str;
-	bool			to_replace;
 	struct s_split	*next;
 }	t_split;
 
-char	*str_replace(char *str, char *old, char *new);
-t_env	*store_env(char **env);
+t_split	**shell_split(char **old_split);
 void	free_env_list(t_env *env);
 void	display_env(t_env *env);
-t_env	*add_env_node(t_env *head, char *name, char *value);
 void	input(t_env *env);
-int		parse_input(char *input, t_env *env);
-char	*replace_var_names(char *input, t_env *env);
-char	*get_var_value(t_env *head, char *name);
-t_split	*shell_split(char *str);
 void	free_shell_split(t_split *split);
+t_env	*store_env(char **env);
+t_env	*add_env_node(t_env *head, char *name, char *value);
+int		parse_input(char *input, t_env *env);
+char	*str_replace(char *str, char *old, char *new);
+char	*get_var_value(t_env *head, char *name);
 
 #endif
