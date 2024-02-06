@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:16:20 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/06 18:21:32 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/06 18:23:28 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,12 @@ char	*replace_var_names(char *input, t_env *env)
 			else if (!c)
 				c = input[i];
 		}
-		if (input[i] == '$' && c != '\'' && (ft_isalnum(input[i + 1]) || input[i + 1] == '_'))
+		if (input[i] == '$' && c != '\''
+			&& (ft_isalnum(input[i + 1]) || input[i + 1] == '_'))
 		{
 			input = replace_curr_name(input, env, &i);
-			if (!input)
-				return (NULL);
-			if (!*input)
-				return (input);
+			if (!input || !*input)
+				break ;
 		}
 		i++;
 	}
