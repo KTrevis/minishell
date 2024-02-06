@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:07:31 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/06 18:19:04 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/06 18:57:48 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_env	*add_env_node(t_env *head, char *name, char *value)
 		return (free(name), free(value), free_env_list(head), NULL);
 	new = ft_calloc(1, sizeof(t_env));
 	if (!new)
-		return (NULL);
+		return (free(name), free(value), free_env_list(head), NULL);
 	new->name = name;
 	new->value = value;
 	if (!head)
