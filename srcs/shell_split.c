@@ -6,11 +6,24 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:50:34 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/06 13:16:37 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:46:14 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	free_list(t_split *head)
+{
+	t_split	*tmp;
+
+	while (head)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp->str);
+		free(tmp);
+	}
+}
 
 static t_split	*add_string(t_split *head, char *str)
 {
@@ -19,7 +32,7 @@ static t_split	*add_string(t_split *head, char *str)
 
 	new = ft_calloc(1, sizeof(t_split));
 	if (!new)
-		return (NULL);
+		return (free_list(head), NULL);
 	new->str = str;
 	if (!head)
 		head = new;
@@ -50,7 +63,11 @@ static t_split	*new_linked_list(char *str)
 	while (str[i])
 	{
 		if (str[i] != ' ' && (i == 0 || str[i - 1] == ' '))
+		{
 			split = add_string(split, create_word(str, &i));
+			if (!split)
+				return (NULL);
+		}
 		i++;
 	}
 	return (split);
@@ -68,6 +85,8 @@ t_split	**shell_split(char **old_split)
 	while (old_split[i])
 	{
 		split[i] = new_linked_list(old_split[i]);
+		if (!split[i])
+			return (free(split), NULL);
 		i++;
 	}
 	return (split);

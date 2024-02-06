@@ -6,85 +6,76 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:16:20 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/06 15:10:21 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/06 18:21:32 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "minishell.h"
 
-static char	*duplicate_var_name(char *str)
+static char	*extract_var_name(char *input)
 {
-	char	*name;
+	char	*str;
 	int		i;
-	int		j;
 
 	i = 1;
-	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
+	while (input[i] && (ft_isalnum(input[i]) || input[i] == '_'))
 		i++;
-	name = ft_calloc(i + 1, sizeof(char));
-	if (!name)
+	str = ft_calloc(i + 1, sizeof(char));
+	if (!str)
 		return (NULL);
-	name[0] = '$';
+	str[0] = '$';
 	i = 1;
-	j = 1;
-	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
-		name[j++] = str[i++];
-	return (name);
-}
-
-static int	leave_quote(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != '\'')
-		i++;
-	if (!str[i])
-		return (i);
-	return (i + 1);
-}
-
-static char	*extract_var_name(char *str)
-{
-	int		i;
-	bool	in_simple_quote;
-
-	i = 0;
-	in_simple_quote = false;
-	while (str[i])
+	while (input[i] && (ft_isalnum(input[i]) || input[i] == '_'))
 	{
-		if (str[i] == '\'')
-			in_simple_quote = !in_simple_quote;
-		if (str[i] == '$' && str[i + 1] && str[i + 1] != ' ')
-		{
-			if (in_simple_quote)
-			{
-				i += leave_quote(str + i);
-				if (!str[i])
-					return (NULL);
-				in_simple_quote = false;
-			}
-			else
-				return (duplicate_var_name(str + i));
-		}
+		str[i] = input[i];
 		i++;
 	}
-	return (NULL);
+	return (str);
 }
 
-char	*replace_var_names(char *input, t_env *env)
+static char	*replace_curr_name(char *input, t_env *env, int *i)
 {
 	char	*name;
 	char	*value;
 	char	*replaced;
 
-	name = extract_var_name(input);
+	name = extract_var_name(input + *i);
 	if (!name)
-		return (free(name), input);
+		return (NULL);
 	value = get_var_value(env, name + 1);
-	replaced = str_replace(input, name, value);
+	replaced = str_replace(input, name, value, *i);
+	*i = 0;
 	free(name);
 	free(input);
-	replaced = replace_var_names(replaced, env);
 	return (replaced);
+}
+
+char	*replace_var_names(char *input, t_env *env)
+{
+	int		i;
+	char	c;
+
+	i = 0;
+	c = 0;
+	while (input[i])
+	{
+		if (input[i] == '\'' || input[i] == '"')
+		{
+			if (c == input[i])
+				c = 0;
+			else if (!c)
+				c = input[i];
+		}
+		if (input[i] == '$' && c != '\'' && (ft_isalnum(input[i + 1]) || input[i + 1] == '_'))
+		{
+			input = replace_curr_name(input, env, &i);
+			if (!input)
+				return (NULL);
+			if (!*input)
+				return (input);
+		}
+		i++;
+	}
+	return (input);
 }

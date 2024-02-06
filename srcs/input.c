@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:09:18 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/05 12:09:19 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:40:36 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	catch_sigint(int sig)
 void	input(t_env *env)
 {
 	char	*input;
+	t_input	res;
 
 	signal(SIGINT, catch_sigint);
 	signal(SIGQUIT, SIG_IGN);
@@ -40,6 +41,7 @@ void	input(t_env *env)
 		input = readline("minishell> ");
 		if (!input)
 			quit_shell(env);
-		parse_input(input, env);
+		add_history(input);
+		res = parse_input(input, env);
 	}
 }
