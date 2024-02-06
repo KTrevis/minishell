@@ -6,13 +6,13 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 21:32:02 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/06 18:10:23 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/06 18:26:58 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static size_t	new_str_size(char *str, char *old, char *new)
+static int	new_str_size(char *str, char *old, char *new)
 {
 	return (ft_strlen(str) + ft_strlen(new) - ft_strlen(old));
 }
@@ -20,8 +20,8 @@ static size_t	new_str_size(char *str, char *old, char *new)
 char	*str_replace(char *str, char *old, char *new, int old_index)
 {
 	char	*new_str;
-	size_t	j;
-	size_t	i;
+	int		j;
+	int		i;
 
 	(void)old_index;
 	new_str = ft_calloc(new_str_size(str, old, new) + 1, sizeof(char));
@@ -31,7 +31,7 @@ char	*str_replace(char *str, char *old, char *new, int old_index)
 	j = 0;
 	while (str[i] && j <= new_str_size(str, old, new))
 	{
-		if (!ft_strncmp(str + i, old, ft_strlen(old)))
+		if (!ft_strncmp(str + i, old, ft_strlen(old)) && i == old_index)
 		{
 			j += ft_strlcpy(new_str + j, new, ft_strlen(new) + 1);
 			ft_strlcpy(new_str + j, str + i + ft_strlen(old), ft_strlen(str));

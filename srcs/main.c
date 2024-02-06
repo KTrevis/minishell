@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 21:50:45 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 22:11:01 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/06 18:50:22 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int ac, char **av, char **env)
 	env_list = store_env(env);
 	if (!env_list)
 		return (0);
+	display_env(env_list);
 	input(env_list);
 	free_env_list(env_list);
 	return (0);

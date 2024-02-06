@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:16:20 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/06 18:23:28 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/06 18:44:53 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*extract_var_name(char *input)
 	return (str);
 }
 
-static char	*replace_curr_name(char *input, t_env *env, int *i)
+static char	*replace_curr_name(char *input, t_env *env, int *i, char *c)
 {
 	char	*name;
 	char	*value;
@@ -46,6 +46,7 @@ static char	*replace_curr_name(char *input, t_env *env, int *i)
 	value = get_var_value(env, name + 1);
 	replaced = str_replace(input, name, value, *i);
 	*i = 0;
+	*c = 0;
 	free(name);
 	free(input);
 	return (replaced);
@@ -70,11 +71,12 @@ char	*replace_var_names(char *input, t_env *env)
 		if (input[i] == '$' && c != '\''
 			&& (ft_isalnum(input[i + 1]) || input[i + 1] == '_'))
 		{
-			input = replace_curr_name(input, env, &i);
-			if (!input || !*input)
+			input = replace_curr_name(input, env, &i, &c);
+			if (!input || !input[0])
 				break ;
 		}
-		i++;
+		else
+			i++;
 	}
 	return (input);
 }
