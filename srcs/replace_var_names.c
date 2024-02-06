@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:16:20 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/06 14:48:24 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:10:21 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static char	*duplicate_var_name(char *str)
 {
 	char	*name;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 1;
 	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))

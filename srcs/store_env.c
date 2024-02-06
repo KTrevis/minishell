@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 21:50:43 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 22:07:29 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/06 15:10:50 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static char	*get_env_var_value(char *str)
 	return (new_str);
 }
 
-
 t_env	*store_env(char **env)
 {
 	t_env	*env_list;
@@ -56,7 +55,7 @@ t_env	*store_env(char **env)
 	while (env[i])
 	{
 		env_list = add_env_node(env_list, get_env_var_name(env[i]),
-			get_env_var_value(env[i]));
+				get_env_var_value(env[i]));
 		if (!env_list)
 			return (NULL);
 		i++;
