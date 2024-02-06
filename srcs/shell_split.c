@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:50:34 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/05 14:55:17 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:16:37 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ static t_split	*add_string(t_split *head, char *str)
 
 static char	*create_word(char *str, int *i)
 {
-	
+	(void)str;
+	(void)i;
+	return (NULL);
 }
 
 static t_split	*new_linked_list(char *str)

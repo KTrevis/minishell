@@ -6,16 +6,11 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:16:20 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/02 11:49:12 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/06 14:48:24 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	in_var_name(char c)
-{
-	return (ft_isalnum(c) || c == '_');
-}
 
 static char	*duplicate_var_name(char *str)
 {
@@ -24,7 +19,7 @@ static char	*duplicate_var_name(char *str)
 	int	j;
 
 	i = 1;
-	while (str[i] && in_var_name(str[i]))
+	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		i++;
 	name = ft_calloc(i + 1, sizeof(char));
 	if (!name)
@@ -32,7 +27,7 @@ static char	*duplicate_var_name(char *str)
 	name[0] = '$';
 	i = 1;
 	j = 1;
-	while (str[i] && in_var_name(str[i]))
+	while (str[i] && (ft_isalnum(str[i]) || str[i] == '_'))
 		name[j++] = str[i++];
 	return (name);
 }
@@ -66,7 +61,7 @@ static char	*extract_var_name(char *str)
 			{
 				i += leave_quote(str + i);
 				if (!str[i])
-					return (ft_strdup(""));
+					return (NULL);
 				in_simple_quote = false;
 			}
 			else
@@ -74,7 +69,7 @@ static char	*extract_var_name(char *str)
 		}
 		i++;
 	}
-	return (ft_strdup(""));
+	return (NULL);
 }
 
 char	*replace_var_names(char *input, t_env *env)
@@ -84,16 +79,12 @@ char	*replace_var_names(char *input, t_env *env)
 	char	*replaced;
 
 	name = extract_var_name(input);
-	if (!*name || !name)
-	{
-		replaced = ft_strdup(input);
-		free(name);
-		if (!replaced)
-			return (NULL);
-		return (replaced);
-	}
+	if (!name)
+		return (free(name), input);
 	value = get_var_value(env, name + 1);
 	replaced = str_replace(input, name, value);
 	free(name);
+	free(input);
+	replaced = replace_var_names(replaced, env);
 	return (replaced);
 }

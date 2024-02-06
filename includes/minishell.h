@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:20:06 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/05 15:36:59 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/06 14:26:47 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ t_env	*add_env_node(t_env *head, char *name, char *value);
 int		parse_input(char *input, t_env *env);
 char	*str_replace(char *str, char *old, char *new);
 char	*get_var_value(t_env *head, char *name);
+char	*replace_var_names(char *input, t_env *env);
 
 #endif
