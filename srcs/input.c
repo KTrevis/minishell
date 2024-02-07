@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:09:18 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/07 09:54:04 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/07 09:55:09 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	input(t_env *env)
 	char	*input;
 	t_input	res;
 
+	(void)res;
 	signal(SIGINT, catch_sigint);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
