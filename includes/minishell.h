@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:20:06 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/06 18:09:31 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/07 09:51:54 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_split
 
 typedef enum
 {
-	QUIT,
+	EXIT,
 	EMPTY_INPUT,
 	SUCCESS
 }	t_input;

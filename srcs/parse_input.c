@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:09:43 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/06 18:11:17 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/07 09:51:45 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_input	parse_input(char *input, t_env *env)
 	input = replace_var_names(input, env);
 	printf("%s\n", input);
 	if (!input)
-		return (QUIT);
+		return (EXIT);
 	free(input);
 	return (SUCCESS);
 }
