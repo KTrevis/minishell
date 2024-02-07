@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_input.c                                      :+:      :+:    :+:   */
+/*   pipe_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/05 12:09:43 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/07 17:38:57 by ketrevis         ###   ########.fr       */
+/*   Created: 2024/02/07 18:20:53 by ketrevis          #+#    #+#             */
+/*   Updated: 2024/02/07 18:53:26 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool	is_empty(char *str)
+t_split	*pipe_split(char *input)
 {
-	int	i;
+	int		i;
+	t_split	*split;
+	char	quote;
 
 	i = 0;
-	while (str[i])
+	quote = 0;
+	while (input[i])
 	{
-		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n'
-			&& str[i] != '\v' && str[i] != '\f' && str[i] != '\r')
-			return (false);
+		if (input[i] == '\'' || input[i] == '"')
+		{
+			if (input[i] == quote)
+				quote = 0;
+			else if (!quote)
+				quote = input[i];
+		}
 		i++;
 	}
-	return (true);
-}
-
-int	parse_input(char *input, t_env *env)
-{
-	if (is_empty(input))
-		return (free(input), EMPTY_INPUT);
-	input = replace_var_names(input, env);
-	if (!input)
-		return (EXIT);
-	free(input);
-	return (SUCCESS);
+	return (split);
 }

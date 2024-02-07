@@ -495,7 +495,13 @@
    match-leak-kinds: reachable
    fun:malloc
    fun:xmalloc
-   fun:add_history
+   fun:rl_maybe_save_line
+   fun:rl_get_previous_history
+   fun:_rl_dispatch_subseq
+   fun:_rl_dispatch_subseq
+   fun:_rl_dispatch_subseq
+   fun:readline_internal_char
+   fun:readline
    fun:input
    fun:main
 }
@@ -505,13 +511,8 @@
    match-leak-kinds: reachable
    fun:malloc
    fun:xmalloc
-   fun:rl_maybe_save_line
-   fun:rl_get_previous_history
-   fun:_rl_dispatch_subseq
-   fun:_rl_dispatch_subseq
-   fun:_rl_dispatch_subseq
-   fun:readline_internal_char
-   fun:readline
+   fun:add_history
+   fun:handle_parse_res
    fun:input
    fun:main
 }

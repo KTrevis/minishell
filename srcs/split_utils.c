@@ -1,39 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_input.c                                      :+:      :+:    :+:   */
+/*   split_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/05 12:09:43 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/07 17:38:57 by ketrevis         ###   ########.fr       */
+/*   Created: 2024/02/07 18:34:41 by ketrevis          #+#    #+#             */
+/*   Updated: 2024/02/07 18:35:19 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool	is_empty(char *str)
+void	free_list(t_split *head)
 {
-	int	i;
+	t_split	*tmp;
 
-	i = 0;
-	while (str[i])
+	while (head)
 	{
-		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n'
-			&& str[i] != '\v' && str[i] != '\f' && str[i] != '\r')
-			return (false);
-		i++;
+		tmp = head;
+		head = head->next;
+		free(tmp->str);
+		free(tmp);
 	}
-	return (true);
 }
 
-int	parse_input(char *input, t_env *env)
+t_split	*add_string(t_split *head, char *str)
 {
-	if (is_empty(input))
-		return (free(input), EMPTY_INPUT);
-	input = replace_var_names(input, env);
-	if (!input)
-		return (EXIT);
-	free(input);
-	return (SUCCESS);
+	t_split	*new;
+	t_split	*curr;
+
+	new = ft_calloc(1, sizeof(t_split));
+	if (!new)
+		return (free_list(head), NULL);
+	new->str = str;
+	if (!head)
+		head = new;
+	else
+	{
+		curr = head;
+		while (curr->next)
+			curr = curr->next;
+		curr->next = new;
+	}
+	return (head);
 }
