@@ -6,11 +6,12 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:09:18 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/07 15:07:10 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:20:37 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <readline/history.h>
 #include <readline/readline.h>
 
 void	quit_shell(t_env *env)
@@ -21,21 +22,6 @@ void	quit_shell(t_env *env)
 	exit(0);
 }
 
-static bool	is_empty(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n'
-			&& str[i] != '\v' && str[i] != '\f' && str[i] != '\r')
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
 static void	catch_sigint(int sig)
 {
 	(void)sig;
@@ -43,6 +29,15 @@ static void	catch_sigint(int sig)
 	printf("\n");
 	rl_replace_line("", 0);
 	rl_redisplay();
+}
+
+void	handle_parse_res(int res, char *input, t_env *env)
+{
+	if (res != EMPTY_INPUT)
+		add_history(input);
+	free(input);
+	if (res == EXIT)
+		quit_shell(env);
 }
 
 void	input(t_env *env)
@@ -58,8 +53,7 @@ void	input(t_env *env)
 		input = readline("minishell> ");
 		if (!input)
 			quit_shell(env);
-		if (!is_empty(input))
-			add_history(input);
-		res = parse_input(input, env);
+		res = parse_input(ft_strdup(input), env);
+		handle_parse_res(res, input, env);
 	}
 }
