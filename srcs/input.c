@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:09:18 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/07 14:46:21 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:07:10 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,21 @@ void	quit_shell(t_env *env)
 	free_env_list(env);
 	rl_clear_history();
 	exit(0);
+}
+
+static bool	is_empty(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ' && str[i] != '\t' && str[i] != '\n'
+			&& str[i] != '\v' && str[i] != '\f' && str[i] != '\r')
+			return (false);
+		i++;
+	}
+	return (true);
 }
 
 static void	catch_sigint(int sig)
@@ -43,7 +58,8 @@ void	input(t_env *env)
 		input = readline("minishell> ");
 		if (!input)
 			quit_shell(env);
-		add_history(input);
+		if (!is_empty(input))
+			add_history(input);
 		res = parse_input(input, env);
 	}
 }
