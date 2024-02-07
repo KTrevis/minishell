@@ -6,30 +6,26 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 21:32:02 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/06 18:26:58 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/07 11:32:39 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	new_str_size(char *str, char *old, char *new)
-{
-	return (ft_strlen(str) + ft_strlen(new) - ft_strlen(old));
-}
-
 char	*str_replace(char *str, char *old, char *new, int old_index)
 {
 	char	*new_str;
-	int		j;
 	int		i;
+	int		j;
+	int		size;
 
-	(void)old_index;
-	new_str = ft_calloc(new_str_size(str, old, new) + 1, sizeof(char));
+	size = ft_strlen(str) + ft_strlen(new) - ft_strlen(old);
+	new_str = ft_calloc(size + 1, sizeof(char));
 	if (!new_str)
 		return (NULL);
 	i = 0;
 	j = 0;
-	while (str[i] && j <= new_str_size(str, old, new))
+	while (str[i] && j <= size)
 	{
 		if (!ft_strncmp(str + i, old, ft_strlen(old)) && i == old_index)
 		{
