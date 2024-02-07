@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:09:18 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/07 15:20:37 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:27:54 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	catch_sigint(int sig)
 	rl_redisplay();
 }
 
-void	handle_parse_res(int res, char *input, t_env *env)
+static void	handle_parse_res(int res, char *input, t_env *env)
 {
 	if (res != EMPTY_INPUT)
 		add_history(input);
