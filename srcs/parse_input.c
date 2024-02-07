@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:09:43 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/07 15:17:10 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:37:04 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static bool	is_empty(char *str)
 	return (true);
 }
 
-t_input	parse_input(char *input, t_env *env)
+int	parse_input(char *input, t_env *env)
 {
 	if (is_empty(input))
 		return (free(input), EMPTY_INPUT);

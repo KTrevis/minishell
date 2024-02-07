@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:20:06 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/07 09:54:51 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:37:32 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ typedef struct s_split
 	struct s_split	*next;
 }	t_split;
 
-typedef enum input_ret
+enum input_parse_ret
 {
 	EXIT,
 	EMPTY_INPUT,
 	SUCCESS
-}	t_input;
+};
 
 t_split	**shell_split(char **old_split);
 void	free_env_list(t_env *env);
@@ -46,7 +46,7 @@ void	input(t_env *env);
 void	free_shell_split(t_split *split);
 t_env	*store_env(char **env);
 t_env	*add_env_node(t_env *head, char *name, char *value);
-t_input	parse_input(char *input, t_env *env);
+int		parse_input(char *input, t_env *env);
 char	*str_replace(char *str, char *old, char *new, int old_index);
 char	*get_var_value(t_env *head, char *name);
 char	*replace_var_names(char *input, t_env *env);

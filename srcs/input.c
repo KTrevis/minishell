@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:09:18 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/07 15:27:54 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:37:53 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	handle_parse_res(int res, char *input, t_env *env)
 void	input(t_env *env)
 {
 	char	*input;
-	t_input	res;
+	int		res;
 
 	(void)res;
 	signal(SIGINT, catch_sigint);
