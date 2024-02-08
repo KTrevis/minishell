@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:09:43 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/07 17:38:57 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:54:20 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,17 @@ static bool	is_empty(char *str)
 
 int	parse_input(char *input, t_env *env)
 {
+	char	**split;
+
 	if (is_empty(input))
 		return (free(input), EMPTY_INPUT);
 	input = replace_var_names(input, env);
 	if (!input)
 		return (EXIT);
+	split = pipe_split(input);
+	for (int i = 0; split[i]; i++)
+		printf("%s\n", split[i]);
+	free_split(split);
 	free(input);
 	return (SUCCESS);
 }

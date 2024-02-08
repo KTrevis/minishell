@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:20:53 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/08 11:46:46 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:52:28 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ char	**pipe_split(char *input)
 	j = 0;
 	quote = 0;
 	split = ft_calloc(count_words(input) + 1, sizeof(char *));
+	if (!split)
+		return (free(input), NULL);
 	while (input[i])
 	{
 		set_quote(input[i], &quote);
@@ -99,9 +101,10 @@ char	**pipe_split(char *input)
 		{
 			split[j++] = new_word(input, &i, &quote);
 			if (!split[j - 1])
-				return (free_split(split), NULL);
+				return (free_split(split), free(input), NULL);
 		}
-		i++;
+		if (input[i])
+			i++;
 	}
 	return (split);
 }
