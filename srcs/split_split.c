@@ -6,10 +6,11 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:50:34 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/08 15:38:08 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:58:48 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "minishell.h"
 
 static int	count_words(char *str)
@@ -54,6 +55,8 @@ static char	*new_word(char *str, int *i, char *quote)
 	int		j;
 
 	word = ft_calloc(word_size(str, *i, *quote) + 1, sizeof(char));
+	if (!word)
+		return (NULL);
 	j = 0;
 	while (str[*i])
 	{
@@ -82,7 +85,11 @@ static char	**split_quote(char *str)
 	{
 		set_quote(str[i], &quote);
 		if (!quote && str[i] != ' ' && (i == 0 || str[i - 1] == ' '))
+		{
 			split[j++] = new_word(str, &i, &quote);
+			if (!split[j - 1])
+				return (free_split(split), NULL);
+		}
 		if (str[i])
 			i++;
 	}
@@ -101,6 +108,8 @@ char	***split_split(char **pipe_split)
 	while (pipe_split[i])
 	{
 		split[i] = split_quote(pipe_split[i]);
+		if (!split[i])
+			return (free_split_split(split), NULL);
 		i++;
 	}
 	return (split);
