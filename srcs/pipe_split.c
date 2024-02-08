@@ -6,11 +6,24 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:20:53 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/08 11:52:28 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:03:31 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	set_quote(char c, char *quote)
+{
+	if (c == '\'' || c == '"')
+	{
+		if (c == *quote)
+			*quote = 0;
+		else if (!*quote)
+			*quote = c;
+		return (*quote);
+	}
+	return (0);
+}
 
 static int	count_words(char *input)
 {
@@ -37,17 +50,6 @@ static int	count_words(char *input)
 	return (words);
 }
 
-static void	set_quote(char c, char *quote)
-{
-	if (c == '\'' || c == '"')
-	{
-		if (c == *quote)
-			*quote = 0;
-		else if (!*quote)
-			*quote = c;
-	}
-}
-
 static int	word_size(char *input, int i, char quote)
 {
 	int	size;
@@ -71,6 +73,8 @@ static char	*new_word(char *input, int *i, char *quote)
 
 	j = 0;
 	word = ft_calloc(word_size(input, *i, *quote) + 1, sizeof(char));
+	if (!word)
+		return (NULL);
 	while (input[*i])
 	{
 		set_quote(input[*i], quote);

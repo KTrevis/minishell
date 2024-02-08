@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 20:52:35 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/01 13:24:19 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:03:22 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 void	free_split(char **strs);
-uint	split_size(char **split);
 
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
@@ -73,15 +72,5 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 int		ft_lstsize(t_list *lst);
-
-int		ft_putchar_len(char c);
-int		ft_putstr_len(char *str);
-int		ft_putnbr_len(int n, unsigned int *len);
-int		ft_putaddr_len(void *ptr);
-int		ft_puthexa_unsigned_len(uintptr_t n, char c);
-int		ft_putnbr_unsigned_len(unsigned int n);
-int		ft_printf(const char *str, ...);
-char	ft_uppercase_char(char c);
-char	*ft_uppercase_str(char *str);
 
 #endif

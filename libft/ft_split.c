@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 18:13:49 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/01/30 18:25:59 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/08 12:04:28 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void	free_split(char **strs)
 	free(strs);
 }
 
-uint	split_size(char **split)
+int	split_size(char **split)
 {
-	uint	i;
+	int	i;
 
 	if (!split)
 		return (0);
