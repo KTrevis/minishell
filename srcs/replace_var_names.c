@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:16:20 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/08 11:55:20 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:01:50 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	*replace_curr_name(char *input, t_env *env, int *i, char *c)
 
 	name = extract_var_name(input + *i);
 	if (!name)
-		return (NULL);
+		return (free(input), NULL);
 	value = get_var_value(env, name + 1);
 	replaced = str_replace(input, name, value, *i);
 	*i = 0;

@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:20:06 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/08 15:57:48 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:00:31 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	free_env_list(t_env *env);
 void	display_env(t_env *env);
 void	input(t_env *env);
 void	quit_shell(t_env *env);
-void	exec(char ***split_split);
 void	free_split_split(char ***split);
 
 char	*str_replace(char *str, char *old, char *new, int old_index);
@@ -49,6 +48,7 @@ char	*replace_var_names(char *input, t_env *env);
 char	**pipe_split(char *input);
 char	***split_split(char **pipe_split);
 
+int		exec(char ***split_split);
 int		set_quote(char c, char *quote);
 int		parse_input(char *input, t_env *env);
 
