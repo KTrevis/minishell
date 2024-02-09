@@ -6,10 +6,11 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 22:07:31 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/06 18:57:48 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/09 13:07:50 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "minishell.h"
 
 void	free_env_list(t_env *env_list)
@@ -46,26 +47,40 @@ char	*get_var_value(t_env *head, char *name)
 	return ("");
 }
 
-t_env	*add_env_node(t_env *head, char *name, char *value)
+int	env_size(t_env *head)
 {
-	t_env	*new;
-	t_env	*curr;
+	int	i;
 
-	curr = head;
-	if (!name || !value)
-		return (free(name), free(value), free_env_list(head), NULL);
-	new = ft_calloc(1, sizeof(t_env));
-	if (!new)
-		return (free(name), free(value), free_env_list(head), NULL);
-	new->name = name;
-	new->value = value;
-	if (!head)
-		head = new;
-	else
+	i = 0;
+	while (head)
 	{
-		while (curr->next)
-			curr = curr->next;
-		curr->next = new;
+		head = head->next;
+		i++;
 	}
-	return (head);
+	return (i);
+}
+
+char	**env_to_split(t_env *head)
+{
+	char	**split;
+	int		i;
+	char	*tmp;
+
+	split = ft_calloc(env_size(head) + 1, sizeof(char **));
+	if (!split)
+		return (NULL);
+	i = 0;
+	while (head)
+	{
+		tmp = ft_strjoin(head->name, "=");
+		if (!tmp)
+			return (free_split(split), NULL);
+		split[i] = ft_strjoin(tmp, head->value);
+		free(tmp);
+		if (!split[i])
+			return (free_split(split), NULL);
+		head = head->next;
+		i++;
+	}
+	return (split);
 }
