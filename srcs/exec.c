@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:10:04 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/09 10:10:21 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:16:56 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	exec(char ***split)
 	for (int i = 0; split[i]; i++) {
 		for (int j = 0; split[i][j]; j++)
 			printf("%s\n", split[i][j]);
-		printf("\n");
+		printf("PIPE\n");
 	}
 	free_split_split(split);
 	return (SUCCESS);

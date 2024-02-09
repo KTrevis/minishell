@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:09:43 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/09 10:10:51 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:10:35 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static bool	is_empty(char *str)
 int	parse_input(char *input, t_env *env)
 {
 	char	**split;
+	char	***split_arr;
 
 	if (is_empty(input))
 		return (free(input), EMPTY_INPUT);
@@ -37,9 +38,12 @@ int	parse_input(char *input, t_env *env)
 	if (!input)
 		return (EXIT);
 	split = pipe_split(input);
-	if (exec(split_split(split)) == EXIT)
-		return (free(input), free_split(split), EXIT);
-	free_split(split);
 	free(input);
+	if (!split)
+		return (EXIT);
+	split_arr = split_split(split);
+	free_split(split);
+	if (exec(split_arr) == EXIT)
+		return (free(input), free_split(split), EXIT);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:50:34 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/09 10:37:24 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:16:35 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,6 @@ static int	word_size(char *input, int i, char quote)
 	int	size;
 
 	size = 0;
-	if (input[i] == quote)
-	{
-		i++;
-		size++;
-	}
 	while (input[i])
 	{
 		set_quote(input[i], &quote);
@@ -63,21 +58,12 @@ static char	*new_word(char *str, int *i, char *quote)
 	if (!word)
 		return (NULL);
 	j = 0;
-	if (str[*i] == *quote)
-	{
-		if (str[*i + 1] == *quote)
-			return (word);
-		word[j++] = str[*i + 1];
-		*i += 2;
-	}
 	while (str[*i])
 	{
-		if (str[*i] == *quote)
-			return (set_quote(str[*i], quote), word);
-		set_quote(str[*i], quote);
-		if ((str[*i] == ' ' && !*quote))
+		if (str[*i] == ' ' && !*quote)
 			return (word);
 		word[j++] = str[(*i)++];
+		set_quote(str[*i], quote);
 	}
 	return (word);
 }
