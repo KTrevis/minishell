@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 15:20:06 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/09 14:00:03 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/09 18:13:22 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+typedef struct s_data
+{
+	char	**command;
+	char	**env;
+	int		pipeline_size;
+	int		*pipes;
+	int		i;
+}	t_data;
+
 enum e_input_parse_ret
 {
 	EXIT,
@@ -42,7 +51,8 @@ void	display_env(t_env *env);
 void	input(t_env *env);
 void	quit_shell(t_env *env);
 void	free_split_split(char ***split);
-void	run_command(char **split, char **env);
+void	run_command(t_data data);
+void	close_pipes(t_data data);
 
 char	*str_replace(char *str, char *old, char *new, int old_index);
 char	*get_var_value(t_env *head, char *name);
@@ -54,5 +64,6 @@ char	***split_split(char **pipe_split);
 int		exec(char ***split_split, t_env *env);
 int		set_quote(char c, char *quote);
 int		parse_input(char *input, t_env *env);
+int		split_split_size(char ***split);
 
 #endif

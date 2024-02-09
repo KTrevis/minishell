@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 13:48:44 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/09 14:27:28 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/09 18:13:31 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,24 @@ static char	**remove_surrounding_quotes(char **split)
 	return (no_surr_quote);
 }
 
-void	run_command(char **split, char **env)
+static void	setup_pipes(t_data data)
+{
+	if (data.i != data.pipeline_size - 1)
+		dup2(data.pipes[1], 1);
+	dup2(data.pipes[0], 0);
+	close_pipes(data);
+}
+
+void	run_command(t_data data)
 {
 	char	**no_surr_quotes;
 
-	(void)split;
-	(void)env;
-	no_surr_quotes = remove_surrounding_quotes(split);
+	setup_pipes(data);
+	if (data.i != data.pipeline_size - 1)
+		for (int i = 0; data.command[i]; i++)
+			printf("%s\n", data.command[i]);
+	no_surr_quotes = remove_surrounding_quotes(data.command);
+	if (data.i == data.pipeline_size - 1)
+		execve("/usr/bin/grep", no_surr_quotes, data.env);
 	free_split(no_surr_quotes);
 }
