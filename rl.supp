@@ -593,3 +593,50 @@
 		fun:input
 		fun:main
 }
+{
+	<readline>
+		Memcheck:Leak
+		match-leak-kinds:reachable
+		fun:malloc
+		fun:tsearch
+		fun:???
+		fun:_nc_tiparm
+		obj:???
+		fun:rl_redisplay
+		fun:_rl_internal_char_cleanup
+		fun:readline_internal_char
+		fun:readline
+		fun:input
+		fun:main
+}
+{
+	<readline>
+		Memcheck:Leak
+		match-leak-kinds:reachable
+		fun:malloc
+		fun:tsearch
+		obj:???
+		fun:_nc_tiparm
+		obj:???
+		fun:rl_redisplay
+		fun:_rl_internal_char_cleanup
+		fun:readline_internal_char
+		fun:readline
+		fun:input
+		fun:main
+}
+{
+	<readline>
+		Memcheck:Leak
+		match-leak-kinds:reachable
+		fun:realloc
+		fun:_nc_doalloc
+		fun:_nc_tiparm
+		obj:???
+		fun:rl_redisplay
+		fun:_rl_internal_char_cleanup
+		fun:readline_internal_char
+		fun:readline
+		fun:input
+		fun:main
+}

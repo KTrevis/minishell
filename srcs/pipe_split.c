@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 18:20:53 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/08 14:03:31 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/09 10:07:50 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,12 @@ static char	*new_word(char *input, int *i, char *quote)
 	char	*word;
 	int		j;
 
-	j = 0;
 	word = ft_calloc(word_size(input, *i, *quote) + 1, sizeof(char));
 	if (!word)
 		return (NULL);
+	j = 0;
+	if (input[*i] == *quote)
+		word[j++] = input[(*i)++];
 	while (input[*i])
 	{
 		set_quote(input[*i], quote);
@@ -101,7 +103,7 @@ char	**pipe_split(char *input)
 	while (input[i])
 	{
 		set_quote(input[i], &quote);
-		if (!quote && input[i] != '|' && (i == 0 || input[i - 1] == '|'))
+		if (input[i] != '|' && (i == 0 || input[i - 1] == '|'))
 		{
 			split[j++] = new_word(input, &i, &quote);
 			if (!split[j - 1])
