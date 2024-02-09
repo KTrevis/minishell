@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:10:04 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/09 12:21:51 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:31:47 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	free_split_split(char ***split)
 
 int	exec(char ***split, t_env *env)
 {
+	(void)env;
 	if (!split)
 		return (EXIT);
 	for (int i = 0; split[i]; i++) {

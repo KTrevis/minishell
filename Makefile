@@ -6,7 +6,7 @@ C_FILES =	main.c str_replace.c store_env.c env_list_utils.c input.c parse_input.
 SRCS = $(addprefix srcs/,$(C_FILES))
 OBJS = $(SRCS:.c=.o)
 
-CFLAGS = -I includes/ -g3
+CFLAGS = -Wall -Wextra -Werror -I includes/ -g3
 
 all: $(NAME)
 

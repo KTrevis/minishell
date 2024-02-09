@@ -563,3 +563,34 @@
 		fun:input
 		fun:main
 }
+{
+	<readline>
+		Memcheck:Leak
+		match-leak-kinds:reachable
+		fun:realloc
+		fun:_nc_doalloc
+		fun:_nc_tiparm
+		obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+		fun:rl_redisplay
+		fun:_rl_internal_char_cleanup
+		fun:readline_internal_char
+		fun:readline
+		fun:input
+		fun:main
+}
+{
+	<readline>
+		Memcheck:Leak
+		match-leak-kinds:reachable
+		fun:malloc
+		fun:tsearch
+		obj:/usr/lib/x86_64-linux-gnu/libtinfo.so.6.3
+		fun:_nc_tiparm
+		obj:/usr/lib/x86_64-linux-gnu/libreadline.so.8.1
+		fun:rl_redisplay
+		fun:_rl_internal_char_cleanup
+		fun:readline_internal_char
+		fun:readline
+		fun:input
+		fun:main
+}
