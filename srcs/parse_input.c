@@ -6,7 +6,7 @@
 /*   By: ketrevis <ketrevis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 12:09:43 by ketrevis          #+#    #+#             */
-/*   Updated: 2024/02/09 12:10:35 by ketrevis         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:18:01 by ketrevis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	parse_input(char *input, t_env *env)
 		return (EXIT);
 	split_arr = split_split(split);
 	free_split(split);
-	if (exec(split_arr) == EXIT)
+	if (exec(split_arr, env) == EXIT)
 		return (free(input), free_split(split), EXIT);
 	return (SUCCESS);
 }
